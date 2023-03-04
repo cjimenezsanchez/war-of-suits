@@ -1,4 +1,8 @@
 package com.jime.warofsuits
 
-class WarOfSuitsApp {
+import android.app.Application
+import dagger.hilt.android.HiltAndroidApp
+
+@HiltAndroidApp
+class WarOfSuitsApp: Application() {
 }
