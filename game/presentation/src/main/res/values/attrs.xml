@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="PlayerPileView">
+        <attr name="playerColor" format="reference" />
+        <attr name="playerIcon" format="reference" />
+        <attr name="counterPosition" format="enum">
+            <enum name="start" value="1" />
+            <enum name="end" value="0" />
+        </attr>
+    </declare-styleable>
+</resources>
