@@ -11,9 +11,11 @@ class InitSuitsWeightUseCase {
     }
 
     private val suitsTypes = listOf(CLUBS, HEARTS, DIAMONDS, SPADES)
-    private val weights = (LOWER_WEIGHT..HIGHER_WEIGHT).shuffled()
 
     operator fun invoke(): List<Suit> {
-        return suitsTypes.zip(weights).map { (type, weight) -> Suit(type, weight) }
+        val weights = (LOWER_WEIGHT..HIGHER_WEIGHT).shuffled()
+        return suitsTypes.zip(weights)
+            .map { (type, weight) -> Suit(type, weight) }
+            .sortedByDescending { it.weight }
     }
 }

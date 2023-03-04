@@ -3,7 +3,7 @@ package com.jime.game.domain.use_case.start_game
 import com.jime.game.domain.model.Game
 import com.jime.game.domain.model.Player
 
-class StartNewGameUseCase(
+class StartNewGameUseCase (
     private val initSuitsWeightUseCase: InitSuitsWeightUseCase,
     private val initDeckUseCase: InitDeckUseCase,
     private val splitDeckUseCase: SplitDeckInHalfUseCase,

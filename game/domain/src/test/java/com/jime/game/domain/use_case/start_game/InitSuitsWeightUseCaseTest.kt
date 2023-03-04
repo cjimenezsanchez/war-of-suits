@@ -11,7 +11,7 @@ class InitSuitsWeightUseCaseTest {
 
     @Test
     fun `given a list of suits check length is correct`() {
-        assertEquals(4, suits.size )
+        assertEquals(4, suits.size)
     }
 
     @Test
@@ -38,6 +38,15 @@ class InitSuitsWeightUseCaseTest {
         val weights = suits.map { it.weight }
         assertTrue(weights.max() == 3)
         assertTrue(weights.min() == 0)
+
+        suits.forEach {
+            assertTrue(it.weight in 0..3)
+        }
+    }
+
+    @Test
+    fun `given a list of suits check list is ordered from highest value to lowest value`() {
+        suits.zipWithNext().forEach { assertTrue(it.first.weight > it.second.weight) }
     }
 
 }

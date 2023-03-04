@@ -2,7 +2,7 @@ package com.jime.game.domain.use_case.play_round
 
 import com.jime.game.domain.model.Game
 
-class PlayNextRoundUseCase(
+class PlayNextRoundUseCase (
     val getPlayerNextCard: GetPlayerNextCardUseCase,
     val getHigherCardFromPairOfCards: GetHigherCardFromPairOfCardsUseCase,
     val updatePlayerPoints: AddPointsToPlayerUseCase,
