@@ -78,6 +78,17 @@ fun Player.getPoints(): Int {
     return discardPile.size
 }
 
+fun Card.valueAsString(): String {
+    return when (value) {
+        in 2..10 -> value.toString()
+        11 -> "J"
+        12 -> "Q"
+        13 -> "K"
+        14 -> "A"
+        else -> ""
+     }
+}
+
 infix fun Card.isHigherThan(otherCard: Card): Boolean {
     return when {
         this.value > otherCard.value -> true

@@ -8,4 +8,9 @@
             <enum name="end" value="0" />
         </attr>
     </declare-styleable>
+
+    <declare-styleable name="PlayingCardView">
+        <attr name="emptyCardPlaceHolder" format="reference"/>
+    </declare-styleable>
+
 </resources>

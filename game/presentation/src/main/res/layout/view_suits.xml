@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <ImageView
+        android:id="@+id/first_suit"
+        android:layout_width="@dimen/extra_large_icon"
+        android:layout_height="@dimen/extra_large_icon"
+        android:contentDescription="@string/suit"
+        tools:src="@drawable/ic_hearts" />
+
+    <ImageView
+        android:id="@+id/second_suit"
+        android:layout_width="@dimen/large_icon"
+        android:layout_height="@dimen/large_icon"
+        android:contentDescription="@string/suit"
+        tools:src="@drawable/ic_clubs" />
+
+    <ImageView
+        android:id="@+id/third_suit"
+        android:layout_width="@dimen/medium_icon"
+        android:layout_height="@dimen/medium_icon"
+        android:contentDescription="@string/suit"
+        tools:src="@drawable/ic_spades" />
+
+    <ImageView
+        android:id="@+id/fourth_suit"
+        android:layout_width="@dimen/regular_icon"
+        android:layout_height="@dimen/regular_icon"
+        android:contentDescription="@string/suit"
+        tools:src="@drawable/ic_diamonds" />
+
+</merge>

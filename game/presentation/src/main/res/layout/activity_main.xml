@@ -2,8 +2,59 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/game_board"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:padding="@dimen/medium_margin"
     tools:context=".ui.MainActivity">
+
+    <com.jime.game.presentation.ui.view.PlayerPileView
+        android:id="@+id/player_1_pile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:counterPosition="end"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:playerColor="@color/red"
+        app:playerIcon="@drawable/ic_magneto" />
+
+    <com.jime.game.presentation.ui.view.SuitsView
+        android:id="@+id/suits"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/regular_margin"
+        android:gravity="center"
+        app:layout_constraintBottom_toTopOf="@id/playing_board"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <com.jime.game.presentation.ui.view.PlayingBoardView
+        android:id="@+id/playing_board"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <com.jime.game.presentation.ui.view.PlayerPileView
+        android:id="@+id/player_2_pile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:counterPosition="start"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:playerColor="@color/blue"
+        app:playerIcon="@drawable/ic_professor_x" />
+
+    <Button
+        android:id="@+id/start_new_game_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:text="@string/new_game"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/playing_board" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
