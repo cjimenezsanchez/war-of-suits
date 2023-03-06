@@ -2,6 +2,7 @@ package com.jime.game.domain.use_case.play_round
 
 import com.jime.game.domain.model.Card
 import com.jime.game.domain.model.Player
+import com.jime.game.domain.model.Player1
 import com.jime.game.domain.model.Suit
 import org.junit.Assert.assertEquals
 import org.junit.Test
@@ -16,14 +17,14 @@ class GetPlayerNextCardUseCaseTest {
 
     @Test
     fun `given a player with playing card to play verify next card is the first one`() {
-        val player = Player("Random", playingPile.toMutableList())
+        val player = Player1("Random", playingPile.toMutableList())
         val card = playingPile.first()
         assertEquals(card, getPlayerNextCardUseCase(player))
     }
 
     @Test
     fun `given a player with no more cards to play verify next card is null`(){
-        val player = Player("Another player", mutableListOf())
+        val player = Player1("Another player", mutableListOf())
         assertEquals(null, getPlayerNextCardUseCase(player))
     }
 }

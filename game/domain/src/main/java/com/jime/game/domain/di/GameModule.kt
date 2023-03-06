@@ -1,5 +1,6 @@
 package com.jime.game.domain.di
 
+import com.jime.game.domain.use_case.GetLastRoundWinnerUseCase
 import com.jime.game.domain.use_case.GetWinnerUseCase
 import com.jime.game.domain.use_case.IsGameFinishedUseCase
 import com.jime.game.domain.use_case.play_round.*
@@ -34,7 +35,8 @@ object GameModule {
         return PlayNextRoundUseCase(
             getPlayerNextCard = GetPlayerNextCardUseCase(),
             getHigherCardFromPairOfCards = GetHigherCardFromPairOfCardsUseCase(),
-            updatePlayerPoints = AddPointsToPlayerUseCase(),
+            addPlayerPoints = AddPointsToPlayerUseCase(),
+            addRoundWinner = AddRoundWinnerUseCase(),
             removePlayedCardFromPlayerPile = RemovePlayedCardFromPlayerPileUseCase()
         )
     }
@@ -46,6 +48,10 @@ object GameModule {
     @Provides
     @ViewModelScoped
     fun providesGetWinnerUseCase() = GetWinnerUseCase()
+
+    @Provides
+    @ViewModelScoped
+    fun providesGetLastRoundWinnerUseCase() = GetLastRoundWinnerUseCase()
 
     @Provides
     @ViewModelScoped

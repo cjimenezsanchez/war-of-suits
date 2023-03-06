@@ -1,9 +1,6 @@
 package com.jime.game.domain.use_case.play_round
 
-import com.jime.game.domain.model.Card
-import com.jime.game.domain.model.Game
-import com.jime.game.domain.model.Player
-import com.jime.game.domain.model.Suit
+import com.jime.game.domain.model.*
 import com.jime.game.domain.use_case.getPoints
 import com.jime.game.domain.use_case.util.suits
 import org.junit.Assert.*
@@ -35,8 +32,8 @@ class PlayNextRoundUseCaseTest {
 
     @Test
     fun `player 1 wins round`() {
-        val player1 = Player("Mary", mutableListOf(card11, card12, card13))
-        val player2 = Player("Nick", mutableListOf(card21, card22, card23))
+        val player1 = Player1("Mary", mutableListOf(card11, card12, card13))
+        val player2 = Player2("Nick", mutableListOf(card21, card22, card23))
 
         val game = Game(player1, player2, testSuits)
 
@@ -51,8 +48,8 @@ class PlayNextRoundUseCaseTest {
 
     @Test
     fun `player 2 wins round`() {
-        val player1 = Player("Mary", mutableListOf(card13, card12, card11))
-        val player2 = Player("Nick", mutableListOf(card21, card22, card23))
+        val player1 = Player1("Mary", mutableListOf(card13, card12, card11))
+        val player2 = Player2("Nick", mutableListOf(card21, card22, card23))
 
         val game = Game(player1, player2, testSuits)
 
@@ -67,8 +64,8 @@ class PlayNextRoundUseCaseTest {
 
     @Test
     fun `game remains the same when no more cards to play`() {
-        val player1 = Player("Mary", mutableListOf())
-        val player2 = Player("Nick", mutableListOf(card21, card22, card23))
+        val player1 = Player1("Mary", mutableListOf())
+        val player2 = Player2("Nick", mutableListOf(card21, card22, card23))
 
         val game = Game(player1, player2, testSuits)
         plaRound(game)

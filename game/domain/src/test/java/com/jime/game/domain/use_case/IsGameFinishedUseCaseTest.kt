@@ -1,9 +1,6 @@
 package com.jime.game.domain.use_case
 
-import com.jime.game.domain.model.Card
-import com.jime.game.domain.model.Game
-import com.jime.game.domain.model.Player
-import com.jime.game.domain.model.Suit
+import com.jime.game.domain.model.*
 import com.jime.game.domain.use_case.util.suits
 import org.junit.Assert.assertEquals
 import org.junit.Test
@@ -23,8 +20,8 @@ class IsGameFinishedUseCaseTest {
     
     @Test
     fun `given two players with no more cards to play then return game is finished true`() {
-        val player1 = Player("Molly", mutableListOf())
-        val player2 = Player("Dolly", mutableListOf())
+        val player1 = Player1("Molly", mutableListOf())
+        val player2 = Player2("Dolly", mutableListOf())
         val game = Game(player1, player2, testSuits)
 
         assertEquals(true, isGameFinished(game))
@@ -32,8 +29,8 @@ class IsGameFinishedUseCaseTest {
 
     @Test
     fun `given two players with still cards to play then return game is finished false`() {
-        val player1 = Player("Molly", mutableListOf(card11, card12, card13))
-        val player2 = Player("Dolly", mutableListOf(card21, card22, card23))
+        val player1 = Player1("Molly", mutableListOf(card11, card12, card13))
+        val player2 = Player2("Dolly", mutableListOf(card21, card22, card23))
         val game = Game(player1, player2, testSuits)
 
         assertEquals(false, isGameFinished(game))

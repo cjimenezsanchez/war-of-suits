@@ -3,8 +3,10 @@
     <string name="player_1_icon">Player 1 icon</string>
     <string name="player_2_pile">Player 2 pile</string>
     <string name="player_2_icon">Player 2 icon</string>
+    <string name="place_holder_icon">Player icon</string>
     <string name="new_game">New Game</string>
     <string name="empty_player_1_card">P1</string>
     <string name="empty_player_2_card">P2</string>
     <string name="suit">suit</string>
+    <string name="draw_game">Draw</string>
 </resources>

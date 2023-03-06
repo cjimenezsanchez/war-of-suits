@@ -5,34 +5,63 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content">
 
-    <androidx.cardview.widget.CardView
-        android:layout_width="@dimen/card_pile_width"
-        android:layout_height="@dimen/card_pile_height"
-        app:cardCornerRadius="@dimen/medium_corner_radius">
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
 
-        <ImageView
-            android:id="@+id/player_pile_reverse"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:contentDescription="@string/player_1_pile"
-            tools:background="@color/red" />
+        <androidx.cardview.widget.CardView
+            android:layout_width="@dimen/card_pile_width"
+            android:layout_height="@dimen/card_pile_height"
+            android:layout_marginTop="@dimen/small_margin"
+            app:cardCornerRadius="@dimen/medium_corner_radius"
+            app:cardUseCompatPadding="true">
 
-        <ImageView
-            android:id="@+id/player_pile_icon"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:contentDescription="@string/player_1_icon"
-            tools:src="@drawable/ic_magneto"
-            tools:tint="@color/white" />
+            <View
+                android:id="@+id/pile_bottom"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:alpha="0.5"
+                android:contentDescription="@string/player_1_pile"
+                tools:background="@color/red" />
 
-    </androidx.cardview.widget.CardView>
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/pile"
+            android:layout_width="@dimen/card_pile_width"
+            android:layout_height="@dimen/card_pile_height"
+            android:layout_marginStart="@dimen/small_margin"
+            app:cardCornerRadius="@dimen/medium_corner_radius"
+            app:cardUseCompatPadding="true">
+
+            <View
+                android:id="@+id/player_pile_reverse"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:clickable="true"
+                android:contentDescription="@string/player_1_pile"
+                android:focusable="true"
+                android:foreground="?attr/selectableItemBackgroundBorderless"
+                tools:background="@color/red" />
+
+            <ImageView
+                android:id="@+id/player_pile_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:contentDescription="@string/player_1_icon"
+                tools:src="@drawable/ic_magneto"
+                tools:tint="@color/white" />
+
+        </androidx.cardview.widget.CardView>
+
+    </RelativeLayout>
 
     <androidx.cardview.widget.CardView
         android:id="@+id/discard_pile"
         android:layout_width="@dimen/discard_pile_width"
         android:layout_height="@dimen/discard_pile_height"
-        android:layout_marginStart="@dimen/small_margin"
+        android:layout_marginTop="6dp"
         app:cardCornerRadius="@dimen/small_corner_radius">
 
         <TextView
@@ -40,9 +69,9 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@color/grey"
+            android:gravity="center"
             android:textSize="@dimen/large_text_size"
             android:textStyle="bold"
-            android:gravity="center"
             tools:text="10" />
 
     </androidx.cardview.widget.CardView>

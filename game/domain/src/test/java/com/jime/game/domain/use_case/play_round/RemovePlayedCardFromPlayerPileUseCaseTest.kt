@@ -2,6 +2,7 @@ package com.jime.game.domain.use_case.play_round
 
 import com.jime.game.domain.model.Card
 import com.jime.game.domain.model.Player
+import com.jime.game.domain.model.Player1
 import com.jime.game.domain.model.Suit
 import com.jime.game.domain.model.Suit.Type.DIAMONDS
 import com.jime.game.domain.model.Suit.Type.SPADES
@@ -18,7 +19,7 @@ class RemovePlayedCardFromPlayerPileUseCaseTest {
 
     @Test
     fun `given a played card verify is no longer present in player playing pile`() {
-        val player = Player("Jane", playingPile.toMutableList())
+        val player = Player1("Jane", playingPile.toMutableList())
         val card = card1
         removePlayedCardFromPlayerPile(player, card)
 
@@ -27,7 +28,7 @@ class RemovePlayedCardFromPlayerPileUseCaseTest {
 
     @Test
     fun `given a played card that doesn't belong to player throw exception`() {
-        val player = Player("Jane", playingPile.toMutableList())
+        val player = Player1("Jane", playingPile.toMutableList())
         val randomCard = Card(Suit(SPADES, 0), 9)
 
         assertThrows(NoSuchElementException::class.java) {

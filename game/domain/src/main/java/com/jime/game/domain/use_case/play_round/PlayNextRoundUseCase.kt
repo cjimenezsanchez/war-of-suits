@@ -5,7 +5,8 @@ import com.jime.game.domain.model.Game
 class PlayNextRoundUseCase (
     val getPlayerNextCard: GetPlayerNextCardUseCase,
     val getHigherCardFromPairOfCards: GetHigherCardFromPairOfCardsUseCase,
-    val updatePlayerPoints: AddPointsToPlayerUseCase,
+    val addPlayerPoints: AddPointsToPlayerUseCase,
+    val addRoundWinner: AddRoundWinnerUseCase,
     val removePlayedCardFromPlayerPile: RemovePlayedCardFromPlayerPileUseCase
 ) {
 
@@ -22,7 +23,8 @@ class PlayNextRoundUseCase (
                 game.player2
             }
 
-            updatePlayerPoints(roundWinner, listOf(card1, card2))
+            addPlayerPoints(roundWinner, listOf(card1, card2))
+            addRoundWinner(game ,roundWinner)
 
             removePlayedCardFromPlayerPile(game.player1, card1)
             removePlayedCardFromPlayerPile(game.player2, card2)

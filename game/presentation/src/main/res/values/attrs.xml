@@ -10,7 +10,7 @@
     </declare-styleable>
 
     <declare-styleable name="PlayingCardView">
-        <attr name="emptyCardPlaceHolder" format="reference"/>
+        <attr name="emptyCardIconPlaceHolder" format="reference"/>
     </declare-styleable>
 
 </resources>

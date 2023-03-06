@@ -3,6 +3,7 @@ package com.jime.game.presentation.ui.viemodel
 import androidx.lifecycle.ViewModel
 import com.jime.game.domain.model.Card
 import com.jime.game.domain.model.Game
+import com.jime.game.domain.use_case.GetLastRoundWinnerUseCase
 import com.jime.game.domain.use_case.GetWinnerUseCase
 import com.jime.game.domain.use_case.IsGameFinishedUseCase
 import com.jime.game.domain.use_case.play_round.GetPlayerNextCardUseCase
@@ -22,6 +23,7 @@ class MainViewModel @Inject constructor(
     private val getPlayerNextCard: GetPlayerNextCardUseCase,
     private val playNextRound: PlayNextRoundUseCase,
     private val isGameFinished: IsGameFinishedUseCase,
+    private val getLastRoundWinner: GetLastRoundWinnerUseCase,
     private val getWinner: GetWinnerUseCase
 ) : ViewModel() {
 
@@ -37,7 +39,6 @@ class MainViewModel @Inject constructor(
     }
 
     fun startNewGame() {
-        println("Start new game called")
         game = startGame("Magneto", "Professor X")
         clearSelectedCards()
         updateUiState(newState = NewGame(game))
@@ -59,7 +60,7 @@ class MainViewModel @Inject constructor(
 
     fun onRoundWinnerShown() {
         clearSelectedCards()
-        updateUiState(newState = FinishedRound(game))
+        updateUiState(newState = StartNewRound(game))
         if (isGameFinished(game)) {
             updateUiState(newState = FinishedGame(getWinner(game)))
         }
@@ -77,7 +78,9 @@ class MainViewModel @Inject constructor(
     private fun playRoundIfReady() {
         if (bothCardsSelected()) {
             playNextRound(game)
-            updateUiState(newState = ShowRoundWinner(game.player1))
+            getLastRoundWinner(game)?.let { winner ->
+                updateUiState(newState = FinishedRound(game, winner))
+            }
         }
     }
 

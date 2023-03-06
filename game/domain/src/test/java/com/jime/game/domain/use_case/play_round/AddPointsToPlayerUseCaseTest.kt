@@ -2,6 +2,7 @@ package com.jime.game.domain.use_case.play_round
 
 import com.jime.game.domain.model.Card
 import com.jime.game.domain.model.Player
+import com.jime.game.domain.model.Player1
 import com.jime.game.domain.model.Suit
 import com.jime.game.domain.use_case.getPoints
 import org.junit.Assert.assertTrue
@@ -17,7 +18,7 @@ class AddPointsToPlayerUseCaseTest {
         val card2 = Card(Suit(Suit.Type.SPADES, 0), 2)
         val points = listOf(card1, card2)
 
-        val player = Player("James", mutableListOf())
+        val player = Player1("James", mutableListOf())
 
         addPointsToPlayer(player, points)
 

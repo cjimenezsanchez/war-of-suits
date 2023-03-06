@@ -1,12 +1,12 @@
 package com.jime.game.presentation.ui.view
 
 import android.content.Context
-import android.graphics.drawable.Drawable
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.animation.AccelerateDecelerateInterpolator
 import android.widget.RelativeLayout
 import android.widget.TextView
+import android.widget.ViewAnimator
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.cardview.widget.CardView
@@ -27,20 +27,30 @@ class PlayingCardView @JvmOverloads constructor(
     private val topLeftIcon: AppCompatImageView
     private val bottomRightIcon: AppCompatImageView
     private val cardValueText: TextView
-    private val emptyCardPlaceHolder: String
     private val cardContainer: RelativeLayout
+    private val iconPlaceHolder: AppCompatImageView
+    private val viewAnimator: ViewAnimator
 
     init {
-        val attr = context.obtainStyledAttributes(attrs, R.styleable.PlayingCardView)
-
-        emptyCardPlaceHolder =
-            attr.getString(R.styleable.PlayingCardView_emptyCardPlaceHolder) ?: ""
 
         val view = LayoutInflater.from(context).inflate(R.layout.view_playing_card, this, true)
         topLeftIcon = view.findViewById(R.id.top_left_icon)
         bottomRightIcon = view.findViewById(R.id.bottom_right_icon)
         cardValueText = view.findViewById(R.id.card_value)
         cardContainer = view.findViewById(R.id.card_container)
+        iconPlaceHolder = view.findViewById(R.id.card_place_holder_icon)
+        viewAnimator = view.findViewById(R.id.card_animator)
+
+        val attr = context.obtainStyledAttributes(attrs, R.styleable.PlayingCardView)
+
+        val emptyCardIconPlaceHolderAttr =
+            attr.getResourceId(
+                R.styleable.PlayingCardView_emptyCardIconPlaceHolder,
+                R.drawable.ic_magneto
+            )
+
+        val emptyCardIcon = AppCompatResources.getDrawable(context, emptyCardIconPlaceHolderAttr)
+        iconPlaceHolder.setImageDrawable(emptyCardIcon)
 
         attr.recycle()
     }
@@ -79,34 +89,49 @@ class PlayingCardView @JvmOverloads constructor(
     }
 
     fun updateCard(card: Card?) {
+        card?.let {
+            updateCardValues(card)
+            showCard()
+            return
+        }
+        showPlaceHolder()
+    }
 
-        val cardValue = getCardTextValue(card)
-        val cardSuitIcon = getCardSuitIcon(card)
+    private fun updateCardValues(card: Card) {
+        val cardSuitIcon = AppCompatResources.getDrawable(context, card.getSuitDrawable())
 
-        cardValueText.text = cardValue
-        cardValueText.alpha = getCardTextAlpha(card)
+        cardValueText.text = card.valueAsString()
         topLeftIcon.setImageDrawable(cardSuitIcon)
         bottomRightIcon.setImageDrawable(cardSuitIcon)
     }
 
-    private fun getCardTextValue(card: Card?): String {
-        card?.let {
-            return card.valueAsString()
-        }
-        return emptyCardPlaceHolder
+    private fun showCard() {
+        viewAnimator.displayedChild = viewAnimator.indexOfChild(cardContainer)
     }
 
-    private fun getCardTextAlpha(card: Card?): Float {
-        card?.let {
-            return 1.0f
-        }
-        return 0.2f
+    private fun showPlaceHolder() {
+        viewAnimator.showNext()
+       viewAnimator.displayedChild = viewAnimator.indexOfChild(iconPlaceHolder)
     }
 
-    private fun getCardSuitIcon(card: Card?): Drawable? {
-        card?.let {
-            return AppCompatResources.getDrawable(context, card.getSuitDrawable())
-        }
-        return null
-    }
+//    private fun getCardTextValue(card: Card?): String {
+//        card?.let {
+//            return card.valueAsString()
+//        }
+//        return emptyCardPlaceHolder
+//    }
+//
+//    private fun getCardTextAlpha(card: Card?): Float {
+//        card?.let {
+//            return 1.0f
+//        }
+//        return 0.2f
+//    }
+//
+//    private fun getCardSuitIcon(card: Card?): Drawable? {
+//        card?.let {
+//            return AppCompatResources.getDrawable(context, card.getSuitDrawable())
+//        }
+//        return null
+//    }
 }

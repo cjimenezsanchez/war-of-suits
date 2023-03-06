@@ -12,6 +12,7 @@
         android:id="@+id/player_1_pile"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_margin="@dimen/medium_margin"
         app:counterPosition="end"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -24,23 +25,43 @@
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/regular_margin"
         android:gravity="center"
-        app:layout_constraintBottom_toTopOf="@id/playing_board"
+        app:layout_constraintBottom_toTopOf="@id/board_animator"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <com.jime.game.presentation.ui.view.PlayingBoardView
-        android:id="@+id/playing_board"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+    <ViewAnimator
+        android:id="@+id/board_animator"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.jime.game.presentation.ui.view.PlayingBoardView
+            android:id="@+id/playing_board"
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/game_winner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/bungee_inline"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:maxLines="2"
+            android:textAllCaps="true"
+            android:textSize="@dimen/huge_large_text_size" />
+
+    </ViewAnimator>
 
     <com.jime.game.presentation.ui.view.PlayerPileView
         android:id="@+id/player_2_pile"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_margin="@dimen/medium_margin"
         app:counterPosition="start"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -55,6 +76,6 @@
         android:text="@string/new_game"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/playing_board" />
+        app:layout_constraintTop_toBottomOf="@id/board_animator" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

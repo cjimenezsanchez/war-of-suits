@@ -7,7 +7,7 @@ class InitDeckUseCase {
 
     companion object {
         private const val CARD_LOWEST_VALUE = 2
-        private const val CARD_HIGHEST_VALUE = 14
+        private const val CARD_HIGHEST_VALUE = 2
     }
 
     operator fun invoke(suits: List<Suit>): List<Card> {

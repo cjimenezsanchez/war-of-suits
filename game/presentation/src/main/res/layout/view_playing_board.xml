@@ -8,7 +8,7 @@
         android:layout_height="@dimen/center_card_height"
         android:layout_margin="@dimen/small_margin"
         app:cardCornerRadius="@dimen/small_corner_radius"
-        app:emptyCardPlaceHolder="@string/empty_player_1_card" />
+        app:emptyCardIconPlaceHolder="@drawable/ic_magneto" />
 
     <com.jime.game.presentation.ui.view.PlayingCardView
         android:id="@+id/player2_card"
@@ -16,6 +16,6 @@
         android:layout_height="@dimen/center_card_height"
         android:layout_margin="@dimen/small_margin"
         app:cardCornerRadius="@dimen/small_corner_radius"
-        app:emptyCardPlaceHolder="@string/empty_player_2_card" />
+        app:emptyCardIconPlaceHolder="@drawable/ic_professor_x" />
 
 </merge>

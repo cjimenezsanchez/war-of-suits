@@ -23,6 +23,7 @@ fun main() {
         GetPlayerNextCardUseCase(),
         GetHigherCardFromPairOfCardsUseCase(),
         AddPointsToPlayerUseCase(),
+        AddRoundWinnerUseCase(),
         RemovePlayedCardFromPlayerPileUseCase()
     )
 
