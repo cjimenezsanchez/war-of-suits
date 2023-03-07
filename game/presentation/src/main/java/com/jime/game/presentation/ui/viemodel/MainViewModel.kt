@@ -1,13 +1,8 @@
 package com.jime.game.presentation.ui.viemodel
 
 import androidx.lifecycle.ViewModel
+import com.jime.game.domain.GameHelper
 import com.jime.game.domain.model.Card
-import com.jime.game.domain.use_case.GetLastRoundWinnerUseCase
-import com.jime.game.domain.use_case.GetGameWinnerUseCase
-import com.jime.game.domain.use_case.IsGameFinishedUseCase
-import com.jime.game.domain.use_case.play_round.GetPlayerNextCardUseCase
-import com.jime.game.domain.use_case.play_round.PlayNextRoundUseCase
-import com.jime.game.domain.use_case.start_game.StartNewGameUseCase
 import com.jime.game.presentation.ui.model.GameUiState
 import com.jime.game.presentation.ui.model.GameUiState.*
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -17,17 +12,10 @@ import javax.inject.Inject
 
 
 @HiltViewModel
-class MainViewModel @Inject constructor(
-    private val startGame: StartNewGameUseCase,
-    private val getPlayerNextCard: GetPlayerNextCardUseCase,
-    private val playNextRound: PlayNextRoundUseCase,
-    private val isGameFinished: IsGameFinishedUseCase,
-    private val getLastRoundWinner: GetLastRoundWinnerUseCase,
-    private val getGameWinner: GetGameWinnerUseCase
+class MainViewModel @Inject constructor(private val gameHelper: GameHelper) : ViewModel() {
 
-) : ViewModel() {
-
-    private val _uiState = MutableStateFlow<GameUiState>(NewGame(startGame("", "")))
+    private val defaultSateGame: GameUiState = NewGame(gameHelper.startGame("", ""))
+    private val _uiState = MutableStateFlow(defaultSateGame)
     val uiState: StateFlow<GameUiState> get() = _uiState
 
     init {
@@ -35,16 +23,15 @@ class MainViewModel @Inject constructor(
     }
 
     fun startNewGame() {
-        updateUiState(newState = NewGame(startGame("Magneto", "Professor X")))
+        updateUiState(newState = NewGame(gameHelper.startGame("Magneto", "Professor X")))
     }
 
     fun onPlayer1SelectCard() {
         if (getPlayer1CurrentCard() == null) {
             onCardsSelected(
-                card1 = getPlayerNextCard(_uiState.value.game.player1),
+                card1 = gameHelper.getPlayerNextCard(_uiState.value.game.player1),
                 card2 = getPlayer2CurrentCard()
             )
-
         }
     }
 
@@ -52,7 +39,7 @@ class MainViewModel @Inject constructor(
         if (getPlayer2CurrentCard() == null) {
             onCardsSelected(
                 card1 = getPlayer1CurrentCard(),
-                card2 = getPlayerNextCard(_uiState.value.game.player2)
+                card2 = gameHelper.getPlayerNextCard(_uiState.value.game.player2)
             )
         }
     }
@@ -75,8 +62,8 @@ class MainViewModel @Inject constructor(
         if (bothCardsSelected()) {
             val game = _uiState.value.game
 
-            playNextRound(game)
-            getLastRoundWinner(game)?.let { winner ->
+            gameHelper.playNextRound(game)
+            gameHelper.getLastRoundWinner(game)?.let { winner ->
                 updateUiState(
                     newState = FinishedRound(
                         game = game,
@@ -95,8 +82,8 @@ class MainViewModel @Inject constructor(
     fun onRoundWinnerShown() {
         val game = _uiState.value.game
         updateUiState(newState = StartNewRound(game))
-        if (isGameFinished(game)) {
-            val winner = getGameWinner(game)
+        if (gameHelper.isGameFinished(game)) {
+            val winner = gameHelper.getGameWinner(game)
             updateUiState(newState = FinishedGame(game, winner))
         }
     }

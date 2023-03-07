@@ -1,5 +1,7 @@
 package com.jime.game.domain.di
 
+import com.jime.game.domain.GameHelper
+import com.jime.game.domain.WarOfSuitsHelper
 import com.jime.game.domain.use_case.GetLastRoundWinnerUseCase
 import com.jime.game.domain.use_case.GetGameWinnerUseCase
 import com.jime.game.domain.use_case.IsGameFinishedUseCase
@@ -18,6 +20,26 @@ import dagger.hilt.android.scopes.ViewModelScoped
 @Module
 @InstallIn(ViewModelComponent::class)
 object GameModule {
+
+    @Provides
+    @ViewModelScoped
+    fun provideGameHelper(
+        startNewGameUseCase: StartNewGameUseCase,
+        getPlayerNextCardUseCase: GetPlayerNextCardUseCase,
+        playNextRoundUseCase: PlayNextRoundUseCase,
+        getLastRoundWinnerUseCase: GetLastRoundWinnerUseCase,
+        isGameFinishedUseCase: IsGameFinishedUseCase,
+        getGameWinnerUseCase: GetGameWinnerUseCase
+    ): GameHelper {
+        return WarOfSuitsHelper(
+            startNewGameUseCase,
+            getPlayerNextCardUseCase,
+            playNextRoundUseCase,
+            isGameFinishedUseCase,
+            getLastRoundWinnerUseCase,
+            getGameWinnerUseCase
+        )
+    }
 
     @Provides
     @ViewModelScoped
