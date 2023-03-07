@@ -9,3 +9,6 @@ The project is divided by modules, one for each feature (in this case there is o
 
 Each module is divided by layers.
 
+### Comments
+
+Find an apk file attach at the root of the project.
