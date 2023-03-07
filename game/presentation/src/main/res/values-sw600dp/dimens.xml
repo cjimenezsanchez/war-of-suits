@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="small_corner_radius">6dp</dimen>
+    <dimen name="medium_corner_radius">12dp</dimen>
+
+    <dimen name="regular_margin">24dp</dimen>
+    <dimen name="medium_margin">18dp</dimen>
+    <dimen name="small_margin">6dp</dimen>
+
+    <dimen name="center_card_with">195dp</dimen>
+    <dimen name="center_card_height">270dp</dimen>
+
+    <dimen name="card_pile_width">189dp</dimen>
+    <dimen name="card_pile_height">234dp</dimen>
+
+    <dimen name="discard_pile_width">54dp</dimen>
+    <dimen name="discard_pile_height">75dp</dimen>
+
+    <dimen name="huge_large_text_size">72sp</dimen>
+    <dimen name="extra_large_text_size">54sp</dimen>
+    <dimen name="large_text_size">30sp</dimen>
+    <dimen name="large_icon">60dp</dimen>
+    <dimen name="extra_large_icon">72dp</dimen>
+    <dimen name="medium_icon">48dp</dimen>
+    <dimen name="regular_icon">36dp</dimen>
+
+</resources>
