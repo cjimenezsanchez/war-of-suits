@@ -8,21 +8,21 @@ package com.jime.game.domain.model
 
 
 abstract class Player {
-    abstract var name: String
-    abstract var playingPile: MutableList<Card>
-    abstract var discardPile: MutableList<Card>
+    abstract val name: String
+    abstract val playingPile: MutableList<Card>
+    abstract val discardPile: MutableList<Card>
 }
 
 data class Player1(
-    override var name: String,
-    override var playingPile: MutableList<Card>,
-    override var discardPile: MutableList<Card> = mutableListOf()
+    override val name: String,
+    override val playingPile: MutableList<Card>,
+    override val discardPile: MutableList<Card> = mutableListOf()
 ): Player()
 
 data class Player2(
-    override var name: String,
-    override var playingPile: MutableList<Card>,
-    override var discardPile: MutableList<Card> = mutableListOf()
+    override val name: String,
+    override val playingPile: MutableList<Card>,
+    override val discardPile: MutableList<Card> = mutableListOf()
 ): Player()
 
 fun Player.nextPlayingCardOrNull(): Card? {
