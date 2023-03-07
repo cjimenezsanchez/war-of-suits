@@ -1,10 +1,8 @@
 package com.jime.game.domain.use_case.play_round
 
 import com.jime.game.domain.model.Card
-import com.jime.game.domain.model.Player
 import com.jime.game.domain.model.Player1
 import com.jime.game.domain.model.Suit
-import com.jime.game.domain.use_case.getPoints
 import org.junit.Assert.assertTrue
 import org.junit.Test
 

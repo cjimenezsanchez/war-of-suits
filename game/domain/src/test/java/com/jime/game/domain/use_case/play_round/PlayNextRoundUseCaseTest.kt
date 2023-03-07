@@ -1,7 +1,6 @@
 package com.jime.game.domain.use_case.play_round
 
 import com.jime.game.domain.model.*
-import com.jime.game.domain.use_case.getPoints
 import com.jime.game.domain.use_case.util.suits
 import org.junit.Assert.*
 import org.junit.Test
