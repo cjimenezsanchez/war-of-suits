@@ -75,7 +75,7 @@ class PlayerPileView @JvmOverloads constructor(
         )
     }
 
-    fun highLightCardAsWinner(then: () -> Unit) {
+    fun highLightPileAsWinner(then: () -> Unit) {
         increaseCard {
             decreaseCard {
                 then()

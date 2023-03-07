@@ -47,6 +47,7 @@
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
+            android:id="@+id/pile"
             android:layout_width="@dimen/card_pile_width"
             android:layout_height="@dimen/card_pile_height"
             app:cardCornerRadius="@dimen/medium_corner_radius"

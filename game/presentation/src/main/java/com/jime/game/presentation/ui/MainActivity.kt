@@ -51,12 +51,6 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun updateGame(newState: GameUiState) {
-        updateGameSuits(newState.game.suitsWeight)
-        updatePlayersPoints(newState.game.player1, newState.game.player2)
-        updatePlayingBoard(newState.player1SelectedCard, newState.player2SelectedCard)
-    }
-
     private fun observeUi() {
         lifecycleScope.launch {
             viewModel.uiState.collect { newUiState ->
@@ -84,6 +78,14 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    private fun updateGame(newState: GameUiState) {
+        newState.apply {
+            updateGameSuits(game.suitsWeight)
+            updatePlayersPoints(game.player1, game.player2)
+            updatePlayingBoard(player1SelectedCard, player2SelectedCard)
+        }
+    }
+
     private fun updatePlayersPoints(firstPlayer: Player1, secondPlayer: Player2) {
         binding.apply {
             player1Pile.updateCounter(firstPlayer.getPoints())
@@ -104,7 +106,7 @@ class MainActivity : AppCompatActivity() {
             is Player1 -> binding.player1Pile
             else -> binding.player2Pile
         }
-        playerPile.highLightCardAsWinner { viewModel.onRoundWinnerShown() }
+        playerPile.highLightPileAsWinner { viewModel.onRoundWinnerShown() }
     }
 
     private fun showBoard() {
