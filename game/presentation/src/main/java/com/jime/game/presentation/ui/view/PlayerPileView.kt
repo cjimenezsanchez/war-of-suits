@@ -6,12 +6,10 @@ import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.View
 import android.view.animation.AccelerateDecelerateInterpolator
-import android.widget.Button
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.content.res.AppCompatResources
-import androidx.cardview.widget.CardView
 import com.jime.game.presentation.R
 
 class PlayerPileView @JvmOverloads constructor(
@@ -20,10 +18,8 @@ class PlayerPileView @JvmOverloads constructor(
 
     companion object {
         private const val AT_LEFT_POSITION = 1
-        private const val SIZE_DELTA = 0.2f
+        private const val SIZE_INCREMENT = 0.2f
         private const val ANIMATION_INTERVAL = 1000L
-
-
     }
 
     private val counterText: TextView
@@ -88,11 +84,11 @@ class PlayerPileView @JvmOverloads constructor(
     }
 
     private fun increaseCard(then: () -> Unit = {}) {
-        animateSizeBy(SIZE_DELTA, then)
+        animateSizeBy(SIZE_INCREMENT, then)
     }
 
     private fun decreaseCard(then: () -> Unit) {
-        animateSizeBy(-SIZE_DELTA, then)
+        animateSizeBy(-SIZE_INCREMENT, then)
     }
 
     private fun animateSizeBy(delta: Float, then: () -> Unit) {
