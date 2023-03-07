@@ -24,3 +24,23 @@ data class Player2(
     override var playingPile: MutableList<Card>,
     override var discardPile: MutableList<Card> = mutableListOf()
 ): Player()
+
+fun Player.nextPlayingCardOrNull(): Card? {
+    return playingPile.firstOrNull()
+}
+
+fun Player.hasCardsToPlay(): Boolean {
+    return playingPile.isNotEmpty()
+}
+
+fun Player.removedPlayedCard(card: Card) {
+    playingPile.remove(card)
+}
+
+fun Player.addPoints(cards: List<Card>) {
+    discardPile.addAll(cards)
+}
+
+fun Player.getPoints(): Int {
+    return discardPile.size
+}

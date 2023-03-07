@@ -6,3 +6,15 @@ data class Game(
     val suitsWeight: List<Suit>,
     val roundWinners: MutableList<Player> = mutableListOf()
 )
+
+fun Game.isFinished(): Boolean {
+    return !player1.hasCardsToPlay() && !player2.hasCardsToPlay()
+}
+
+fun Game.winner(): Player? {
+    return when {
+        player1.getPoints() > player2.getPoints() -> player1
+        player1.getPoints() < player2.getPoints() -> player2
+        else -> null
+    }
+}

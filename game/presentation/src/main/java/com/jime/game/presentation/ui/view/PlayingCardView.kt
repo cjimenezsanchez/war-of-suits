@@ -11,7 +11,7 @@ import androidx.appcompat.content.res.AppCompatResources
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.cardview.widget.CardView
 import com.jime.game.domain.model.Card
-import com.jime.game.domain.use_case.valueAsString
+import com.jime.game.domain.model.valueAsString
 import com.jime.game.presentation.R
 import com.jime.game.presentation.ui.extensions.getSuitDrawable
 

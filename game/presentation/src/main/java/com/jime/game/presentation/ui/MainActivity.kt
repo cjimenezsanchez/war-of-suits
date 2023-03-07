@@ -6,7 +6,7 @@ import androidx.activity.viewModels
 import androidx.core.content.res.ResourcesCompat
 import androidx.lifecycle.lifecycleScope
 import com.jime.game.domain.model.*
-import com.jime.game.domain.use_case.getPoints
+import com.jime.game.domain.model.getPoints
 import com.jime.game.presentation.R
 import com.jime.game.presentation.databinding.ActivityMainBinding
 import com.jime.game.presentation.ui.extensions.getColorId

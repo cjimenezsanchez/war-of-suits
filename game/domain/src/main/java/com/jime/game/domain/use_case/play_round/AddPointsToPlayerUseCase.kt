@@ -2,7 +2,7 @@ package com.jime.game.domain.use_case.play_round
 
 import com.jime.game.domain.model.Card
 import com.jime.game.domain.model.Player
-import com.jime.game.domain.use_case.addPoints
+import com.jime.game.domain.model.addPoints
 
 class AddPointsToPlayerUseCase {
 
