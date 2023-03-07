@@ -5,9 +5,9 @@ import com.jime.game.domain.use_case.util.suits
 import org.junit.Assert.assertEquals
 import org.junit.Test
 
-class GetWinnerUseCaseTest {
+class GetGameWinnerUseCaseTest {
 
-    private val getWinner = GetWinnerUseCase()
+    private val getWinner = GetGameWinnerUseCase()
     private val testSuits = suits
 
     private val emptyPlayer1 = Player1("John", mutableListOf())
@@ -22,7 +22,7 @@ class GetWinnerUseCaseTest {
         val player1 = emptyPlayer1.copy(discardPile = discardPile)
         val player2 = emptyPlayer2
 
-        val game = Game(player1, player2, suits)
+        val game = Game(player1, player2, testSuits)
         val winner = getWinner(game)
 
         assertEquals(player1,  winner)
@@ -33,7 +33,7 @@ class GetWinnerUseCaseTest {
         val player1 = emptyPlayer1
         val player2 = emptyPlayer2.copy(discardPile = discardPile)
 
-        val game = Game(player1, player2, suits)
+        val game = Game(player1, player2, testSuits)
         val winner = getWinner(game)
 
         assertEquals(player2, winner)
@@ -44,7 +44,7 @@ class GetWinnerUseCaseTest {
         val player1 = emptyPlayer1.copy(discardPile = discardPile)
         val player2 = emptyPlayer2.copy(discardPile = discardPile)
 
-        val game = Game(player1, player2, suits)
+        val game = Game(player1, player2, testSuits)
         val winner = getWinner(game)
 
         assertEquals(null, winner)

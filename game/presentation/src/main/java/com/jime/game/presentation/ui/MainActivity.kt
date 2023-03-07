@@ -11,9 +11,10 @@ import com.jime.game.presentation.R
 import com.jime.game.presentation.databinding.ActivityMainBinding
 import com.jime.game.presentation.ui.extensions.getColorId
 import com.jime.game.presentation.ui.model.GameUiState
-import com.jime.game.presentation.ui.model.GameUiState.NewGame
+import com.jime.game.presentation.ui.model.GameUiState.*
 import com.jime.game.presentation.ui.viemodel.MainViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
@@ -30,6 +31,10 @@ class MainActivity : AppCompatActivity() {
 
         initViewsListeners()
         observeUi()
+
+        lifecycleScope.launch {
+            updateGame(viewModel.uiState.first())
+        }
     }
 
     private fun initViewsListeners() {
@@ -38,43 +43,40 @@ class MainActivity : AppCompatActivity() {
                 viewModel.startNewGame()
             }
             player1Pile.setOnClickPileListener {
-                viewModel.onFirstPlayerSelectCard()
+                viewModel.onPlayer1SelectCard()
             }
             player2Pile.setOnClickPileListener {
-                viewModel.secondPlayerSelectedCard()
-            }
-            playingBoard.setOnHighLightFinishedListener {
-                viewModel.onRoundWinnerShown()
+                viewModel.onPlayer2SelectedCard()
             }
         }
+    }
+
+    private fun updateGame(newState: GameUiState) {
+        updateGameSuits(newState.game.suitsWeight)
+        updatePlayersPoints(newState.game.player1, newState.game.player2)
+        updatePlayingBoard(newState.player1SelectedCard, newState.player2SelectedCard)
     }
 
     private fun observeUi() {
         lifecycleScope.launch {
             viewModel.uiState.collect { newUiState ->
-                println("Collect new state: $newUiState")
                 when (newUiState) {
                     is NewGame -> {
-                        updateGameSuits(newUiState.game.suitsWeight)
-                        updatePlayingBoard(null, null)
-                        updateCurrentPoints(newUiState.game)
+                        updateGame(newUiState)
                         showBoard()
                     }
-                    is GameUiState.SelectingCards -> {
+                    is SelectingCards,
+                    is StartNewRound -> {
                         updatePlayingBoard(
                             card1 = newUiState.player1SelectedCard,
                             card2 = newUiState.player2SelectedCard
                         )
                     }
-                    is GameUiState.FinishedRound -> {
+                    is FinishedRound -> {
                         showRoundWinner(newUiState.winner)
-                        updateCurrentPoints(newUiState.game)
+                        updatePlayersPoints(newUiState.game.player1, newUiState.game.player2)
                     }
-                    is GameUiState.StartNewRound -> {
-                        updateGameSuits(newUiState.game.suitsWeight)
-                        updatePlayingBoard(null, null)
-                    }
-                    is GameUiState.FinishedGame -> {
+                    is FinishedGame -> {
                         showGameWinner(newUiState.winner)
                     }
                 }
@@ -82,10 +84,10 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun updateCurrentPoints(game: Game) {
+    private fun updatePlayersPoints(firstPlayer: Player1, secondPlayer: Player2) {
         binding.apply {
-            player1Pile.updateCounter(game.player1.getPoints())
-            player2Pile.updateCounter(game.player2.getPoints())
+            player1Pile.updateCounter(firstPlayer.getPoints())
+            player2Pile.updateCounter(secondPlayer.getPoints())
         }
     }
 
@@ -98,25 +100,16 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun showRoundWinner(player: Player) {
-        when (player) {
-            is Player1 -> {
-                //binding.playingBoard.onPlayer1WinsRound()
-                binding.player1Pile.highLightCardAsWinner {
-                    viewModel.onRoundWinnerShown()
-                }
-            }
-            is Player2 -> {
-                //binding.playingBoard.onPlayer2WinsRound()
-                binding.player2Pile.highLightCardAsWinner {
-                    viewModel.onRoundWinnerShown()
-                }
-            }
+        val playerPile = when (player) {
+            is Player1 -> binding.player1Pile
+            else -> binding.player2Pile
         }
+        playerPile.highLightCardAsWinner { viewModel.onRoundWinnerShown() }
     }
 
     private fun showBoard() {
         binding.apply {
-           boardAnimator.displayedChild = boardAnimator.indexOfChild(playingBoard)
+            boardAnimator.displayedChild = boardAnimator.indexOfChild(playingBoard)
         }
     }
 
@@ -124,15 +117,16 @@ class MainActivity : AppCompatActivity() {
         binding.apply {
             boardAnimator.displayedChild = boardAnimator.indexOfChild(gameWinner)
 
-            val promptText = if (player == null) {
-                getString(R.string.draw_game)
-            } else {
-                "Winner \n ${player.name}"
-            }
-
-            gameWinner.text = promptText
             val colorResource = ResourcesCompat.getColor(resources, player.getColorId(), null)
             gameWinner.setTextColor(colorResource)
+            gameWinner.text = getWinnerText(player)
         }
+    }
+
+    private fun getWinnerText(player: Player?): String {
+        player?.let {
+            return "${getString(R.string.winner)} \n ${player.name}"
+        }
+        return getString(R.string.draw_game)
     }
 }

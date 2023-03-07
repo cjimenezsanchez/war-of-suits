@@ -1,7 +1,7 @@
 package com.jime.game.domain.di
 
 import com.jime.game.domain.use_case.GetLastRoundWinnerUseCase
-import com.jime.game.domain.use_case.GetWinnerUseCase
+import com.jime.game.domain.use_case.GetGameWinnerUseCase
 import com.jime.game.domain.use_case.IsGameFinishedUseCase
 import com.jime.game.domain.use_case.play_round.*
 import com.jime.game.domain.use_case.start_game.InitDeckUseCase
@@ -47,7 +47,7 @@ object GameModule {
 
     @Provides
     @ViewModelScoped
-    fun providesGetWinnerUseCase() = GetWinnerUseCase()
+    fun providesGetWinnerUseCase() = GetGameWinnerUseCase()
 
     @Provides
     @ViewModelScoped

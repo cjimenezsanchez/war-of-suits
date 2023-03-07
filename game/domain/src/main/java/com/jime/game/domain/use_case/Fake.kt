@@ -28,7 +28,7 @@ fun main() {
     )
 
     val isGameFinished = IsGameFinishedUseCase()
-    val getWinner = GetWinnerUseCase()
+    val getWinner = GetGameWinnerUseCase()
 
     while (!isGameFinished(game)) {
         playRound(game)

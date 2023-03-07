@@ -11,11 +11,13 @@ class PlayNextRoundUseCaseTest {
     private val getNextPlayerCard = GetPlayerNextCardUseCase()
     private val getHigherCardFromPairOfCards = GetHigherCardFromPairOfCardsUseCase()
     private val addPointsToPlayer = AddPointsToPlayerUseCase()
+    private val addRoundWinner = AddRoundWinnerUseCase()
     private val removePlayedCardFromPlayerPile = RemovePlayedCardFromPlayerPileUseCase()
     private val plaRound = PlayNextRoundUseCase(
         getNextPlayerCard,
         getHigherCardFromPairOfCards,
         addPointsToPlayer,
+        addRoundWinner,
         removePlayedCardFromPlayerPile
     )
 

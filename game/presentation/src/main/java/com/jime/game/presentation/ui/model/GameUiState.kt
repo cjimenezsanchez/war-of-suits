@@ -4,13 +4,34 @@ import com.jime.game.domain.model.Card
 import com.jime.game.domain.model.Game
 import com.jime.game.domain.model.Player
 
-sealed class GameUiState {
-    data class NewGame(val game: Game) : GameUiState()
+sealed class GameUiState(
+    open val game: Game,
+    open val player1SelectedCard: Card?,
+    open val player2SelectedCard: Card?
+) {
+    data class NewGame(
+        override val game: Game,
+    ) : GameUiState(game, null, null)
+
     data class SelectingCards(
-        val player1SelectedCard: Card?,
-        val player2SelectedCard: Card?
-    ) : GameUiState()
-    data class FinishedRound(val game: Game, val winner: Player): GameUiState()
-    data class StartNewRound(val game: Game) : GameUiState()
-    data class FinishedGame(val winner: Player?): GameUiState()
+        override val game: Game,
+        override val player1SelectedCard: Card?,
+        override val player2SelectedCard: Card?,
+    ) : GameUiState(game, player1SelectedCard, player2SelectedCard)
+
+    data class FinishedRound(
+        override val game: Game,
+        override val player1SelectedCard: Card?,
+        override val player2SelectedCard: Card?,
+        val winner: Player
+    ) : GameUiState(game, player1SelectedCard, player2SelectedCard)
+
+    data class StartNewRound(
+        override val game: Game
+    ) : GameUiState(game, null, null)
+
+    data class FinishedGame(
+        override val game: Game,
+        val winner: Player?
+    ) : GameUiState(game, null, null)
 }
