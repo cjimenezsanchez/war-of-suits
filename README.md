@@ -11,4 +11,4 @@ Each module is divided by layers.
 
 ### Comments
 
-Find an apk file attach at the root of the project.
+Find an apk file attached at the root of the project.
